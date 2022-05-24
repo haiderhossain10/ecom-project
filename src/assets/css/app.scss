@@ -1,0 +1,180 @@
+/*
+google font family
+*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    max-width: 1250px;
+    padding: 0 12px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+/*
+banner section
+*/
+
+.banner {
+    background-image: url('./../img/banner-img.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-top: 150px;
+    padding-bottom: 50px;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.banner-info {
+    width: 477px;
+
+    h2 {
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 58px;
+        color: #fff;
+        text-transform: uppercase;
+        padding-bottom: 10px;
+    }
+
+    p {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 24px;
+        color: #fff;
+    }
+}
+
+
+/*
+product section
+*/
+
+.product-box {
+    width: 750px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 100px 0;
+}
+
+.product {
+    cursor: pointer;
+
+    img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 400;
+
+        &:first-of-type {
+            color: #222;
+            padding-bottom: 4px;
+        }
+
+        &:last-of-type {
+            color: #888;
+        }
+    }
+}
+
+/*
+footer section
+*/
+.footer {
+    background-image: url('./../img/footer-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 50px 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10rem;
+}
+
+.footer-about {
+    h4 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #fff;
+        padding-bottom: 1rem;
+    }
+
+    p {
+        font-size: 14px;
+        font-weight: 400;
+        color: #fff;
+    }
+}
+
+.footer-logo {
+    text-align: center;
+
+    h4 {
+        font-size: 18px;
+        font-weight: 400;
+        color: #fff;
+        padding-bottom: 1rem;
+    }
+}
+
+.footer-support {
+
+    h4 {
+        font-size: 18px;
+        font-weight: 400;
+        color: #fff;
+        padding-bottom: 1rem;
+    }
+
+    nav {
+        a {
+            font-size: 16px;
+            font-weight: 400;
+            color: #fff;
+            display: inline-block;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.footer-nav {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+    justify-content: flex-end;
+}
