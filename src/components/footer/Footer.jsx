@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Link } from "react-router-dom";
 import FooterLogo from "./../../assets/img/footer-logo.png";
 
 const Footer = () => {
-    console.log(FooterLogo);
     return (
         <>
             <div className="footer">
@@ -24,9 +23,9 @@ const Footer = () => {
                             <h4>Useful Links</h4>
                             <nav>
                                 <div className="footer-nav">
-                                    <a href="#">Home</a>
-                                    <a href="#">About Us</a>
-                                    <a href="#">Contact Us</a>
+                                    <Link to="/">Home</Link>
+                                    <Link to="/">About Us</Link>
+                                    <Link to="/">Contact Us</Link>
                                 </div>
                             </nav>
                         </div>

@@ -3,32 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const productSlice = createSlice({
     name: "product",
     initialState: {
-        products: [
-            {
-                id: 1,
-                name: "Product 1",
-                price: 100,
-                description: "This is product 1",
-                image: "https://picsum.photos/201",
-                quantity: 1,
-            },
-            {
-                id: 2,
-                name: "Product 2",
-                price: 300,
-                description: "This is product 2",
-                image: "https://picsum.photos/202",
-                quantity: 1,
-            },
-            {
-                id: 3,
-                name: "Product 3",
-                price: 300,
-                description: "This is product 3",
-                image: "https://picsum.photos/203",
-                quantity: 1,
-            },
-        ],
+        products: [],
         addedCart: [],
         totalPrice: 0,
         fee: 15,
@@ -36,11 +11,15 @@ export const productSlice = createSlice({
         Shipping: 150,
     },
     reducers: {
-        setProduct: () => {},
+        setProduct: (state, action) => {
+            // console.log(action.payload);
+            state.products = action.payload;
+        },
         updateQuantity: (state, action) => {
             state.products = state.products.filter((item) => {
-                return parseInt(item.id) === parseInt(action.payload.id)
-                    ? (item.quantity = action.payload.quan)
+                return parseInt(item.product_master_Id) ===
+                    parseInt(action.payload.id)
+                    ? (item.is_active = action.payload.quan)
                     : item;
             });
         },
@@ -54,7 +33,8 @@ export const productSlice = createSlice({
                     action.payload.price * action.payload.quantity;
                 state.totalPrice = totalPrice;
                 // subtotal calculation
-                const subTotal = (state.totalPrice * state.fee) / 100;
+                const subTotal =
+                    (state.product_Selling_Price * state.fee) / 100;
                 state.subTotal = subTotal;
 
                 // adding the product to localstore
@@ -66,7 +46,8 @@ export const productSlice = createSlice({
                 // is cart already have this product
                 let isAdded = false;
                 state.addedCart.map((item) => {
-                    return parseInt(item.id) === parseInt(action.payload.id)
+                    return parseInt(item.product_master_Id) ===
+                        parseInt(action.payload.product_master_Id)
                         ? (isAdded = true)
                         : null;
                 });
@@ -76,11 +57,13 @@ export const productSlice = createSlice({
                     // total price calculation
                     const totalPrice =
                         state.totalPrice +
-                        action.payload.price * action.payload.quantity;
+                        action.payload.product_Selling_Price *
+                            action.payload.is_active;
                     state.totalPrice = totalPrice;
 
                     // subtotal calculation
-                    const subTotal = (state.totalPrice * state.fee) / 100;
+                    const subTotal =
+                        (state.product_Selling_Price * state.fee) / 100;
                     state.subTotal = subTotal;
 
                     // adding the product to localstore

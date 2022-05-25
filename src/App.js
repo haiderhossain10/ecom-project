@@ -17,6 +17,7 @@ const App = () => {
             }
         }
     }, [dispatch, productData]);
+
     return (
         <>
             <PageRoute />

@@ -99,6 +99,9 @@ product section
     p {
         font-size: 14px;
         font-weight: 400;
+        display: flex;
+        align-items: center;
+        gap: 10px;
 
         &:first-of-type {
             color: #222;
@@ -131,6 +134,8 @@ cart section
         width: 100%;
         height: 400px;
         object-fit: cover;
+        border: 1px solid #999;
+        padding: 1rem;
     }
 }
 
@@ -240,6 +245,50 @@ cart section
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    button {
+        height: 45px;
+        padding: 0 2rem;
+        background-color: #c27bc2;
+        color: #fff;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
+/*
+product view section
+*/
+.view-cart {
+    padding: 100px 0;
+}
+
+.product-item {
+    margin-bottom: 1.4rem;
+    display: flex;
+    gap: 1rem;
+
+    img {
+        height: 150px;
+        width: 150px;
+        border: 1px solid #999;
+        padding: 1rem;
+    }
+}
+
+.view-cart-content {
+    width: 750px;
+    margin: 0 auto;
+}
+
+.product-empty {
+    h2 {
+        font-size: 30px;
+        font-weight: 600;
+        color: #999;
+        padding-bottom: 1rem;
+    }
 
     button {
         height: 45px;
