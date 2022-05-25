@@ -2,38 +2,61 @@
 import { useState } from "react";
 import Layout from "../components/layout/Layout";
 import { BsFacebook, BsWhatsapp, BsTwitter, BsPinterest } from "react-icons/bs";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, updateQuantity } from "../store/features/productSlice";
 
 const Cart = () => {
+    const param = useParams();
+    const productData = useSelector((state) => state.product.products);
+    const addedProduct = useSelector((state) => state.product.addedCart);
+    const dispatch = useDispatch();
     const [getQuan, setQuan] = useState(1);
+
     const quanHandler = (e) => {
         setQuan(e.target.value);
+        dispatch(updateQuantity({ id: param.id, quan: parseInt(getQuan) + 1 }));
     };
+
+    const singleProduct = productData.filter((item) => {
+        return parseInt(item.id) === parseInt(param.id);
+    });
+
+    const addToCartHandler = () => {
+        dispatch(addToCart(singleProduct[0]));
+    };
+
     return (
         <>
             <Layout>
+                <div className="view-cart-btn">
+                    <Link to="/view-cart">
+                        <button>View Cart ({addedProduct.length})</button>
+                    </Link>
+                </div>
                 <div className="cart-box">
                     <div className="container">
                         <div className="cart-content">
                             <div className="cart-left">
                                 <img
-                                    src="https://images.pexels.com/photos/821651/pexels-photo-821651.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                    src={singleProduct[0].image}
                                     alt="product"
                                 />
                             </div>
                             <div className="cart-right">
-                                <h4>I phone 13 pro max</h4>
-                                <h2>$ 1200</h2>
+                                <h4>{singleProduct[0].name}</h4>
+                                <h2>
+                                    &#8377;
+                                    {(
+                                        singleProduct[0].price *
+                                        singleProduct[0].quantity
+                                    ).toFixed(2)}
+                                </h2>
                                 <div className="cart-info">
                                     <p>Meterial - Phone</p>
                                     <p>Color - Black</p>
                                 </div>
-                                <p>
-                                    It is a long established fact that a reader
-                                    will be distracted by the readable content
-                                    of a page when looking at its layout. The
-                                    point of using Lorem Ipsum is that it has a
-                                    more-or-less normal distribution of letters
-                                </p>
+                                <p>{singleProduct[0].description}</p>
                                 <div className="cart-quantity">
                                     <p>Quantity</p>
                                     <input
@@ -45,7 +68,9 @@ const Cart = () => {
                                     />
                                 </div>
                                 <div className="cart-btn">
-                                    <button>Add To Cart</button>
+                                    <button onClick={addToCartHandler}>
+                                        Add To Cart
+                                    </button>
                                     <button>Buy Now</button>
                                 </div>
                                 <div className="product-share">

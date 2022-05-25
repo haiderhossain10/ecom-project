@@ -236,6 +236,22 @@ cart section
 
 }
 
+.view-cart-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    button {
+        height: 45px;
+        padding: 0 2rem;
+        background-color: #c27bc2;
+        color: #fff;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
 /*
 footer section
 */
