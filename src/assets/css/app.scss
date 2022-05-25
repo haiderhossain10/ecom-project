@@ -84,6 +84,11 @@ product section
 
 .product {
     cursor: pointer;
+    transition: all .3s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 
     img {
         width: 100%;
