@@ -12,7 +12,6 @@ export const productSlice = createSlice({
     },
     reducers: {
         setProduct: (state, action) => {
-            // console.log(action.payload);
             state.products = action.payload;
         },
         updateQuantity: (state, action) => {
@@ -26,16 +25,8 @@ export const productSlice = createSlice({
         addToCart: (state, action) => {
             // add to cart
             if (state.addedCart.length === 0) {
+                alert("Product added to cart");
                 state.addedCart.push(action.payload);
-                // total price calculation
-                const totalPrice =
-                    state.totalPrice +
-                    action.payload.price * action.payload.quantity;
-                state.totalPrice = totalPrice;
-                // subtotal calculation
-                const subTotal =
-                    (state.product_Selling_Price * state.fee) / 100;
-                state.subTotal = subTotal;
 
                 // adding the product to localstore
                 window.localStorage.setItem(
@@ -52,19 +43,8 @@ export const productSlice = createSlice({
                         : null;
                 });
                 if (!isAdded) {
+                    alert("Product added to cart");
                     state.addedCart = [...state.addedCart, action.payload];
-
-                    // total price calculation
-                    const totalPrice =
-                        state.totalPrice +
-                        action.payload.product_Selling_Price *
-                            action.payload.is_active;
-                    state.totalPrice = totalPrice;
-
-                    // subtotal calculation
-                    const subTotal =
-                        (state.product_Selling_Price * state.fee) / 100;
-                    state.subTotal = subTotal;
 
                     // adding the product to localstore
                     window.localStorage.setItem(
@@ -79,9 +59,40 @@ export const productSlice = createSlice({
         updateLocalstoreCart: (state, action) => {
             state.addedCart = [...action.payload];
         },
+        deleteCartItem: (state, action) => {
+            if (action.payload.length === 0) {
+                state.addedCart = [];
+                window.localStorage.removeItem("addedCartItem");
+            } else {
+                state.addedCart = action.payload;
+                window.localStorage.setItem(
+                    "addedCartItem",
+                    JSON.stringify(state.addedCart)
+                );
+            }
+        },
+        updateFinalQty: (state, action) => {
+            state.addedCart.filter((item) => {
+                return parseInt(item.product_master_Id) ===
+                    parseInt(action.payload.id)
+                    ? (item.is_active = action.payload.quan)
+                    : item;
+            });
+
+            window.localStorage.setItem(
+                "addedCartItem",
+                JSON.stringify(state.addedCart)
+            );
+        },
     },
 });
 
-export const { setProduct, updateQuantity, addToCart, updateLocalstoreCart } =
-    productSlice.actions;
+export const {
+    setProduct,
+    updateQuantity,
+    addToCart,
+    updateLocalstoreCart,
+    deleteCartItem,
+    updateFinalQty,
+} = productSlice.actions;
 export default productSlice.reducer;

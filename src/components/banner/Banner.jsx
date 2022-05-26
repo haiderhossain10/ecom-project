@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "./../../assets/img/logo.png";
 
 const Banner = () => {
@@ -6,7 +7,9 @@ const Banner = () => {
             <div className="banner">
                 <div className="container">
                     <div className="banner-content">
-                        <img src={Logo} alt="Logo" />
+                        <Link to="/">
+                            <img src={Logo} alt="Logo" />
+                        </Link>
                         <div className="banner-info">
                             <h2>The Body Shop</h2>
                             <p>

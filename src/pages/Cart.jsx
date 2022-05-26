@@ -46,13 +46,10 @@ const Cart = () => {
             );
             if (!checkEmpty(data.data)) {
                 setProductDetails(data.data);
-                console.log(data.data);
             }
         };
         fetchData();
     }, [param.id]);
-
-    console.log(getProductDetails);
 
     return (
         <>
