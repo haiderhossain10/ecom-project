@@ -5,6 +5,7 @@ import PageRoute from "./routes/PageRoute";
 import {
     setProduct,
     updateLocalstoreCart,
+    updateTotalPrice,
 } from "./store/features/productSlice";
 
 const App = () => {
@@ -47,6 +48,20 @@ const App = () => {
         };
         fetchData();
     }, [dispatch]);
+
+    useEffect(() => {
+        const updateCal = () => {
+            let total = 0;
+            for (const product of productData) {
+                const productTotal =
+                    parseInt(product.product_Selling_Price) *
+                    parseInt(product.is_active);
+                total = total + productTotal;
+            }
+            dispatch(updateTotalPrice(total));
+        };
+        updateCal();
+    }, [dispatch, productData]);
 
     return (
         <>

@@ -5,6 +5,8 @@ import ProductItem from "../components/productItem/ProductItem";
 
 const ViewCart = () => {
     const productData = useSelector((state) => state.product.addedCart);
+    const subTotal = useSelector((state) => state.product.subTotal);
+    const shipping = useSelector((state) => state.product.shipping);
     return (
         <div>
             <Layout>
@@ -42,30 +44,38 @@ const ViewCart = () => {
                                     </>
                                 )}
                             </div>
-                            <div className="view-cart-right">
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>Subtotal</td>
-                                            <td>150</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Shipping</td>
-                                            <td>150</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td>
-                                                <p>Total</p>
-                                                <span>Tax Included</span>
-                                            </td>
-                                            <td>500</td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                                <button>Check Out</button>
-                            </div>
+                            {subTotal !== 0 && (
+                                <>
+                                    <div className="view-cart-right">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Subtotal</td>
+                                                    <td>{subTotal}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Shipping</td>
+                                                    <td>{shipping}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td>
+                                                        <p>Total</p>
+                                                        <span>
+                                                            Tax Included
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        {subTotal + shipping}
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        <button>Check Out</button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -6,9 +6,8 @@ export const productSlice = createSlice({
         products: [],
         addedCart: [],
         totalPrice: 0,
-        fee: 15,
         subTotal: 0,
-        Shipping: 150,
+        shipping: 150,
     },
     reducers: {
         setProduct: (state, action) => {
@@ -86,6 +85,9 @@ export const productSlice = createSlice({
                 JSON.stringify(state.addedCart)
             );
         },
+        updateTotalPrice: (state, action) => {
+            state.subTotal = action.payload;
+        },
     },
 });
 
@@ -96,5 +98,6 @@ export const {
     updateLocalstoreCart,
     deleteCartItem,
     updateFinalQty,
+    updateTotalPrice,
 } = productSlice.actions;
 export default productSlice.reducer;
