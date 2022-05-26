@@ -15,12 +15,14 @@ export const productSlice = createSlice({
             state.products = action.payload;
         },
         updateQuantity: (state, action) => {
-            state.products = state.products.filter((item) => {
-                return parseInt(item.product_master_Id) ===
-                    parseInt(action.payload.id)
-                    ? (item.is_active = action.payload.quan)
-                    : item;
-            });
+            if (!isNaN(action.payload.quan)) {
+                state.products = state.products.filter((item) => {
+                    return parseInt(item.product_master_Id) ===
+                        parseInt(action.payload.id)
+                        ? (item.is_active = action.payload.quan)
+                        : item;
+                });
+            }
         },
         addToCart: (state, action) => {
             // add to cart
@@ -40,7 +42,7 @@ export const productSlice = createSlice({
                     return parseInt(item.product_master_Id) ===
                         parseInt(action.payload.product_master_Id)
                         ? (isAdded = true)
-                        : null;
+                        : "";
                 });
                 if (!isAdded) {
                     alert("Product added to cart");

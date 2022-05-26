@@ -21,13 +21,21 @@ const Cart = () => {
         return parseInt(item.product_master_Id) === parseInt(param.id);
     });
 
+    // qty update
     const quanHandler = (e) => {
         setQuan(e.target.value);
-        dispatch(updateQuantity({ id: param.id, quan: parseInt(getQuan) + 1 }));
+        dispatch(
+            updateQuantity({ id: param.id, quan: parseInt(e.target.value) })
+        );
     };
 
     const addToCartHandler = () => {
-        dispatch(addToCart(singleProduct[0]));
+        if (getQuan !== "") {
+            dispatch(addToCart(singleProduct[0]));
+        } else {
+            alert("Quanity min 1");
+            setQuan(1);
+        }
     };
 
     useEffect(() => {
