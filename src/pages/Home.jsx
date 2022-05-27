@@ -24,7 +24,6 @@ const Home = () => {
                         );
                     })}
                 </div>
-                <Link to="/?page=1">1</Link>
             </Layout>
         </>
     );
