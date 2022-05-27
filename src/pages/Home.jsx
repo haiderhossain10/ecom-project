@@ -1,13 +1,10 @@
 import { useSelector } from "react-redux";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import Product from "../components/product/Product";
 
 const Home = () => {
     const productData = useSelector((state) => state.product.products);
-    const [searchParams] = useSearchParams();
-    console.log(searchParams.get("page"));
-
     return (
         <>
             <Layout>

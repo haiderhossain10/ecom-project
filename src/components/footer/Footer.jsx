@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import FooterLogo from "./../../assets/img/footer-logo.png";
 
 const Footer = () => {
+    const siteInfoData = useSelector((state) => state.info.info);
     return (
         <>
             <div className="footer">
@@ -9,11 +11,7 @@ const Footer = () => {
                     <div className="footer-content">
                         <div className="footer-about">
                             <h4>About The Body Shop</h4>
-                            <p>
-                                In publishing and graphic design, Lorem ipsum is
-                                a placeholder text commonly used to demonstrate
-                                the visual.
-                            </p>
+                            <p>{siteInfoData.store_Description} </p>
                         </div>
                         <div className="footer-logo">
                             <h4>© Powered By</h4>

@@ -46,6 +46,11 @@ banner section
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    img {
+        height: 200px;
+        width: 200px;
+    }
 }
 
 .banner-info {

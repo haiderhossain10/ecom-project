@@ -7,6 +7,34 @@ const ViewCart = () => {
     const productData = useSelector((state) => state.product.addedCart);
     const subTotal = useSelector((state) => state.product.subTotal);
     const shipping = useSelector((state) => state.product.shipping);
+
+    const buyHandler = () => {
+        var options = {
+            key: process.env.REACT_APP_KEY,
+            key_secret: process.env.REACT_APP_KEY_SECRET,
+            amount: (subTotal + shipping) * 100,
+            currency: "INR",
+            name: "STARTUP_PROJECTS",
+            description: "for testing purpose",
+            handler: function (response) {
+                alert(response.razorpay_payment_id);
+            },
+            prefill: {
+                name: "Haider Hosain",
+                email: "haiderhossain11@gmail.com",
+                contact: "+8801882930500",
+            },
+            notes: {
+                address: "Razorpay Corporate office",
+            },
+            theme: {
+                color: "#3399cc",
+            },
+        };
+        var pay = new window.Razorpay(options);
+        pay.open();
+    };
+
     return (
         <div>
             <Layout>
@@ -72,7 +100,12 @@ const ViewCart = () => {
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                        <button>Check Out</button>
+                                        <button
+                                            id="rzp-button1"
+                                            onClick={buyHandler}
+                                        >
+                                            Check Out
+                                        </button>
                                     </div>
                                 </>
                             )}
