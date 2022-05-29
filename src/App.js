@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { checkHelperStore } from "./helper/helperStore";
 import { checkEmpty, run_axios_api } from "./helper/utility";
 import PageRoute from "./routes/PageRoute";
+import { checkAuth } from "./store/features/authSlice";
 import {
     setProduct,
     updateLocalstoreCart,
@@ -85,6 +87,14 @@ const App = () => {
         };
 
         siteInfo();
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (checkHelperStore("logged")) {
+            dispatch(checkAuth(true));
+        } else {
+            dispatch(checkAuth(false));
+        }
     }, [dispatch]);
 
     return (

@@ -22,8 +22,10 @@ const Footer = () => {
                             <nav>
                                 <div className="footer-nav">
                                     <Link to="/">Home</Link>
-                                    <Link to="/">About Us</Link>
-                                    <Link to="/">Contact Us</Link>
+                                    <Link to="/about-us">About Us</Link>
+                                    <p style={{ color: "white" }}>
+                                        Contact Us: 1211
+                                    </p>
                                 </div>
                             </nav>
                         </div>

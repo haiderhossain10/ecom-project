@@ -26,7 +26,6 @@ export const productSlice = createSlice({
         addToCart: (state, action) => {
             // add to cart
             if (state.addedCart.length === 0) {
-                alert("Product added to cart");
                 state.addedCart.push(action.payload);
 
                 // adding the product to localstore
@@ -44,7 +43,6 @@ export const productSlice = createSlice({
                         : "";
                 });
                 if (!isAdded) {
-                    alert("Product added to cart");
                     state.addedCart = [...state.addedCart, action.payload];
 
                     // adding the product to localstore

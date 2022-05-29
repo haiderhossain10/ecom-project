@@ -1,14 +1,20 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import ProductItem from "../components/productItem/ProductItem";
+import { checkHelperStore } from "../helper/helperStore";
 
 const ViewCart = () => {
     const productData = useSelector((state) => state.product.addedCart);
     const subTotal = useSelector((state) => state.product.subTotal);
     const shipping = useSelector((state) => state.product.shipping);
 
+    const navigate = useNavigate();
+
     const buyHandler = () => {
+        if (!checkHelperStore("logged")) {
+            return navigate("/login");
+        }
         var options = {
             key: process.env.REACT_APP_KEY,
             key_secret: process.env.REACT_APP_KEY_SECRET,
@@ -62,9 +68,7 @@ const ViewCart = () => {
                                 ) : (
                                     <>
                                         <div className="product-empty">
-                                            <h2>
-                                                Total cart :(0), Cart is Empty!
-                                            </h2>
+                                            <h2>Your cart is empty!</h2>
                                             <Link to="/">
                                                 <button>Back</button>
                                             </Link>

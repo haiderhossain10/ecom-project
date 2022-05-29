@@ -6,7 +6,12 @@ const Banner = () => {
     const siteInfoData = useSelector((state) => state.info.info);
     return (
         <>
-            <div className="banner">
+            <div
+                className="banner"
+                style={{
+                    backgroundImage: `url(${siteInfoData.store_Banner_Image})`,
+                }}
+            >
                 <div className="container">
                     <div className="banner-content">
                         <Link to="/">

@@ -30,6 +30,129 @@ a {
 }
 
 /*
+header section
+*/
+
+.header-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0;
+    z-index: 999;
+}
+
+.header-content {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    a {
+        color: #fff;
+        font-weight: 400;
+        color: #fff;
+        font-size: 14px;
+
+        &:hover {
+            color: #b45db4;
+        }
+    }
+}
+
+.verify-box {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+
+.verify-content {
+    width: 350px;
+    margin: auto;
+
+    button {
+        height: 40px;
+        padding: 0 2rem;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        transition: all .3s;
+
+        &:first-of-type {
+            background-color: #C7A3C7;
+
+            &:hover {
+                background-color: #c27bc2;
+            }
+        }
+    }
+}
+
+/*
+form section
+*/
+
+.form-box {
+    padding: 3rem 0;
+}
+
+.form-content {
+    width: 350px;
+    margin: auto;
+    padding: 1rem;
+    border: 1px solid #b45db4;
+
+    h2 {
+        text-align: center;
+        font-size: 30px;
+        text-align: center;
+        padding-bottom: 2rem;
+        color: #333333;
+    }
+
+    button {
+        height: 45px;
+        padding: 0 2rem;
+        border: none;
+        cursor: pointer;
+        color: #fff;
+        transition: all .3s;
+
+        &:first-of-type {
+            background-color: #C7A3C7;
+
+            &:hover {
+                background-color: #c27bc2;
+            }
+        }
+    }
+}
+
+.form-control {
+    margin-bottom: 1rem;
+
+    input {
+        height: 40px;
+        width: 100%;
+        padding: 0 1rem;
+        border: 1px solid #b45db4;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    span {
+        font-size: 14px;
+        color: red;
+    }
+}
+
+/*
 banner section
 */
 
@@ -40,12 +163,25 @@ banner section
     background-position: center;
     padding-top: 150px;
     padding-bottom: 50px;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
 }
 
 .banner-content {
     display: flex;
     align-items: center;
     gap: 1rem;
+    position: relative;
+    z-index: 99;
 
     img {
         height: 200px;
@@ -488,4 +624,21 @@ footer section
     flex-direction: column;
     gap: 3px;
     justify-content: flex-end;
+}
+
+/***
+buttons
+***/
+
+.btn-logout {
+    background-color: #b45db4;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    transition: all .3s;
+
+    &:hover {
+        background-color: red;
+    }
 }
