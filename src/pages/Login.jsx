@@ -2,9 +2,14 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/header/Header";
-import { helperStore } from "../helper/helperStore";
+import {
+    checkHelperStore,
+    getHelperStore,
+    helperStore,
+} from "../helper/helperStore";
 import { checkEmpty, run_axios_api } from "../helper/utility";
 import { checkAuth } from "../store/features/authSlice";
+import { updateUserInfo } from "../store/features/siteInfoSlice";
 
 const Login = () => {
     const {
@@ -34,7 +39,6 @@ const Login = () => {
 
         if (!checkEmpty(data)) {
             helperStore("logged", data);
-
             dispatch(checkAuth(true));
             return navigate("/");
         } else {

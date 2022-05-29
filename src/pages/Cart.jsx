@@ -7,12 +7,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart, updateQuantity } from "../store/features/productSlice";
 import { checkEmpty, run_axios_api } from "../helper/utility";
 import { checkHelperStore } from "../helper/helperStore";
+import payStore from "../helper/payStore";
 
 const Cart = () => {
     const param = useParams();
 
     const productData = useSelector((state) => state.product.products);
     const addedProduct = useSelector((state) => state.product.addedCart);
+    const useInfoData = useSelector((state) => state.info.userInfo);
+
     const dispatch = useDispatch();
 
     const [getProductDetails, setProductDetails] = useState([]);
@@ -22,9 +25,7 @@ const Cart = () => {
         return parseInt(item.product_master_Id) === parseInt(param.id);
     });
 
-    const subTotal = useSelector((state) => state.product.subTotal);
-    // const shipping = useSelector((state) => state.product.shipping);
-    console.log(subTotal);
+    const shipping = useSelector((state) => state.product.shipping);
 
     const navigate = useNavigate();
 
@@ -54,19 +55,23 @@ const Cart = () => {
             key: process.env.REACT_APP_KEY,
             key_secret: process.env.REACT_APP_KEY_SECRET,
             amount:
-                parseInt(getProductDetails.product_Selling_Price) *
+                (parseInt(getProductDetails.product_Selling_Price) + shipping) *
                 getQuan *
                 100,
             currency: "INR",
             name: "STARTUP_PROJECTS",
             description: "for testing purpose",
             handler: function (response) {
-                alert(response.razorpay_payment_id);
+                payStore(response.razorpay_payment_id);
             },
             prefill: {
-                name: "Haider Hosain",
-                email: "haiderhossain11@gmail.com",
-                contact: "+8801882930500",
+                name:
+                    useInfoData.customer_details.general_customer_First_Name +
+                    " " +
+                    useInfoData.customer_details.general_customer_Lirst_Name,
+                email: useInfoData.customer_details.general_customer_Email,
+                contact:
+                    useInfoData.customer_details.general_customer_Telephone,
             },
             notes: {
                 address: "Razorpay Corporate office",
@@ -76,6 +81,15 @@ const Cart = () => {
             },
         };
         var pay = new window.Razorpay(options);
+        pay.on("payment.failed", function (response) {
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+        });
         pay.open();
     };
 

@@ -14,7 +14,6 @@ const Register = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (formData) => {
-        // console.log(formData);
         const formAllData = {
             f_name: formData.firstName,
             l_name: formData.lastName,
@@ -26,6 +25,7 @@ const Register = () => {
             refer_code: formData.referCode,
             password: formData.password,
         };
+        // register api
         const data = await run_axios_api(
             "",
             `${process.env.REACT_APP_URL}/user/registration`,

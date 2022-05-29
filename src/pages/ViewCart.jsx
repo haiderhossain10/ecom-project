@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import ProductItem from "../components/productItem/ProductItem";
 import { checkHelperStore } from "../helper/helperStore";
+import payStore from "../helper/payStore";
 
 const ViewCart = () => {
     const productData = useSelector((state) => state.product.addedCart);
     const subTotal = useSelector((state) => state.product.subTotal);
     const shipping = useSelector((state) => state.product.shipping);
+    const useInfoData = useSelector((state) => state.info.userInfo);
 
     const navigate = useNavigate();
 
@@ -23,12 +25,16 @@ const ViewCart = () => {
             name: "STARTUP_PROJECTS",
             description: "for testing purpose",
             handler: function (response) {
-                alert(response.razorpay_payment_id);
+                payStore(response.razorpay_payment_id);
             },
             prefill: {
-                name: "Haider Hosain",
-                email: "haiderhossain11@gmail.com",
-                contact: "+8801882930500",
+                name:
+                    useInfoData.customer_details.general_customer_First_Name +
+                    " " +
+                    useInfoData.customer_details.general_customer_Lirst_Name,
+                email: useInfoData.customer_details.general_customer_Email,
+                contact:
+                    useInfoData.customer_details.general_customer_Telephone,
             },
             notes: {
                 address: "Razorpay Corporate office",
@@ -38,6 +44,15 @@ const ViewCart = () => {
             },
         };
         var pay = new window.Razorpay(options);
+        pay.on("payment.failed", function (response) {
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+        });
         pay.open();
     };
 
